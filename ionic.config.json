@@ -1,0 +1,7 @@
+{
+  "name": "stuckCar",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
