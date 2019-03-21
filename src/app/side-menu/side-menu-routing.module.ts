@@ -19,9 +19,14 @@ const routes: Routes = [
       {
         path: 'list',
         loadChildren: './list/list.module#ListPageModule'
+      },
+      {
+        path: 'tabs',
+        loadChildren: './tabs/tabs.module#TabsPageModule'
       }
     ]
   }
+
 ];
 
 @NgModule({
