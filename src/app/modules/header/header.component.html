@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons *ngIf="configButton" slot="{{ configButton.slot }}">
+      <ion-button *ngFor="let item of configButton.button" (click)="navigate(item?.ionIcon?.route)" >
+        
+        <ion-icon
+          *ngIf="item.ionIcon"
+          name="{{item.ionIcon.name}}"
+          size="{{item.ionIcon.size}}">
+        </ion-icon>
+
+        <ion-back-button *ngIf="item.ionBack" icon="buttonIcon" text="{{item.ionBack.text}}"></ion-back-button>
+      </ion-button>
+      <ion-button >
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 import { LandingPage } from './landing.page';
+import { HeaderModule } from '../modules/header/header.module';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    HeaderModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
