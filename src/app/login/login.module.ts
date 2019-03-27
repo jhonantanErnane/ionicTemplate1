@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { LoginPage } from './login.page';
-import { HeaderModule } from '../modules/header/header.module';
 
 const routes: Routes = [
   {
@@ -19,7 +16,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    HeaderModule,
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
