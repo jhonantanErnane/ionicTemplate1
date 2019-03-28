@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
-import { LoginPage } from './login.page';
+
+import { SignupPage } from './signup.page';
 
 const routes: Routes = [
   {
@@ -11,11 +13,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LoginPage,
+        component: SignupPage
       },
       {
-        path: 'signup',
-        loadChildren: '../signup/signup.module#SignupPageModule'
+        path: 'terms',
+        loadChildren: './terms/terms.module#TermsPageModule'
       }
     ]
   }
@@ -24,11 +26,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage]
+  declarations: [SignupPage]
 })
-export class LoginPageModule { }
+export class SignupPageModule {}
