@@ -8,34 +8,40 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="form">
-    <ion-grid justify-content-center align-items-center>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">User</ion-label>
-            <ion-input formControlName="user"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" formControlName="pass"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-button [disabled]="!form.valid" expand="block" routerLink="/main">LOGIN</ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-button expand="block" routerLink="/login/signup">Signup</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form">
+        <ion-grid justify-content-center align-items-center>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">User</ion-label>
+                <ion-input formControlName="user"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="pass"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button [disabled]="!form.valid" expand="block" routerLink="/main">LOGIN</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-end ion-padding-top">
+            <ion-col size="auto">
+              <ion-label color="primary" routerLink="/login/signup">
+                Signup
+              </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
