@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginPage
+  },
+  {
+    path: 'signup',
+    loadChildren: './signup/signup.module#SignupPageModule'
   }
 ];
 
@@ -26,4 +30,4 @@ const routes: Routes = [
   ],
   declarations: [LoginPage]
 })
-export class LoginPageModule {}
+export class LoginPageModule { }
