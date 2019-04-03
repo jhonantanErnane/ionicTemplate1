@@ -1,5 +1,13 @@
-
-<app-header title="landing" [configButton]="configButton"></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>landing</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login">
+        <ion-icon name="log-in" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
   <ion-grid>

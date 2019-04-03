@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text='' defaultHref="/landing"></ion-back-button>
+      <ion-back-button text='' [defaultHref]="['/landing']"></ion-back-button>
     </ion-buttons>
     <ion-title>login</ion-title>
   </ion-toolbar>
@@ -31,11 +31,9 @@
           <ion-button [disabled]="!form.valid" expand="block" routerLink="/main">LOGIN</ion-button>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-justify-content-end">
-        <ion-col size="auto">
-          <ion-item class="ion-no-padding" lines="none" routerLink="/login/signup">
-            <ion-label color="primary">Sign up</ion-label>
-          </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" routerLink="/login/signup">Signup</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
