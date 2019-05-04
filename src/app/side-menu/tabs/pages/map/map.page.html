@@ -1,12 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/menu/lista-detalhe"></ion-back-button>
     </ion-buttons>
-    <ion-title>map</ion-title>
+    <ion-title>Informações</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  
+  <ion-item>
+    <ion-label position="floating">Enter Address</ion-label>
+    <ion-input #txtHome type="text"></ion-input>
+  </ion-item>
+
+  <app-map *ngIf="showMap" ></app-map>
 </ion-content>

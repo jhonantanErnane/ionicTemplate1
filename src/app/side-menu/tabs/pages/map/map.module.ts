@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { MapPage } from './map.page';
+import { MapModule } from 'src/app/modules/map/map.module';
 
 const routes: Routes = [
   {
@@ -18,9 +17,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    MapModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
   declarations: [MapPage]
 })
-export class MapPageModule {}
+export class MapPageModule { }
