@@ -3,15 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/menu/lista-detalhe"></ion-back-button>
     </ion-buttons>
-    <ion-title>Informações</ion-title>
+    <ion-title>Informations</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label position="floating">Enter Address</ion-label>
-    <ion-input #txtHome type="text"></ion-input>
-  </ion-item>
+  <form [formGroup]="form">
+    <ion-searchbar #txtHome class="margin-bottom" formControlName="endereco" [placeholder]="placeholder"
+      style="padding:0%;" (ionBlur)="onBlurSearch()" (ionClear)="onClearSearch($event)">
+    </ion-searchbar>
+  </form>
 
-  <app-map *ngIf="showMap" ></app-map>
+  <app-map #map *ngIf="showMap" [latLong]="latLng" (currentLocationEvent)="onCurrentLocationEvent($event)" (fullAddressEvent)="onFullAddressEvent($event)"></app-map>
 </ion-content>

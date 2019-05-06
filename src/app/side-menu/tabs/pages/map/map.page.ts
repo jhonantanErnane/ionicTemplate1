@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone, ViewChild, ElementRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { NavController, IonInput } from '@ionic/angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavController, IonInput, IonSearchbar } from '@ionic/angular';
+import { MapComponent } from 'src/app/modules/map/map.component';
 
 declare var google: any;
 
@@ -11,25 +12,25 @@ declare var google: any;
 })
 export class MapPage {
 
-  latitude: number;
-  longitude: number;
   searchControl: FormControl;
   zoom: number;
   showMap: boolean;
-  @ViewChild('txtHome') searchElementRef: IonInput;
+  @ViewChild('txtHome') searchElementRef: IonSearchbar;
+  @ViewChild('map') map: MapComponent;
+  form: FormGroup;
+  latLng: { lat: number; lng: number };
+  private myLatLng: { lat: number; lng: number };
+  placeholder = 'Enter the address';
 
   constructor(
     private navCtrl: NavController,
     private ngZone: NgZone) {
     this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
 
-    // create search FormControl
-    this.searchControl = new FormControl();
-
-    // set current position
-    this.setCurrentPosition();
+    this.form = new FormGroup({
+      endereco: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      comentario: new FormControl('', [Validators.required, Validators.minLength(2)])
+    });
 
   }
 
@@ -37,43 +38,74 @@ export class MapPage {
     this.showMap = true;
     // create search FormControl
     this.searchControl = new FormControl();
-    const a = await this.searchElementRef.getInputElement();
-    console.log(a);
+    const inputHtmlRef = await this.searchElementRef.getInputElement();
+    // console.log(inputHtmlRef);
 
     // const nativeHomeInputBox = document.getElementById('txtHome').getElementsByTagName('input')[0];
-    const autocomplete = new google.maps.places.Autocomplete(a, {
-      types: ['geocode'],
-      componentRestrictions: { country: 'BR' },
-      radius: 500
+    const autocomplete = new google.maps.places.Autocomplete(inputHtmlRef, {
+      types: ['address'],
+      componentRestrictions: { country: 'BR' }
     });
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
         // get the place result
         const place = autocomplete.getPlace();
-        console.log(place);
+        // console.log(place);
 
         // verify result
         if (place.geometry === undefined || place.geometry === null) {
           return;
         }
 
-        // set latitude, longitude and zoom
-        this.latitude = place.geometry.location.lat();
-        this.longitude = place.geometry.location.lng();
-        this.zoom = 12;
+        // set latitude, longitude
+        this.latLng = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng()
+        };
+        this.form.get('endereco').setValue(place.formatted_address);
+        console.log(this.latLng);
       });
     });
   }
 
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
+  onClearSearch(event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.map.setMarker(this.myLatLng);
+    this.placeholder = 'Your location';
+  }
+
+  onBlurSearch() {
+    if (this.form.get('endereco').value || this.form.get('endereco').value === '') {
+      this.map.setMarker(this.myLatLng);
+      this.form.get('endereco').setValue('Your location');
     }
   }
+
+  onFullAddressEvent(fullAddress: string) {
+    // console.log(fullAddress);
+    this.form.get('endereco').setValue(fullAddress);
+    // this.endereco = fullAddress;
+  }
+
+  // onCurrentLocationEvent(latLong: { lat: number, lng: number }) {
+  onCurrentLocationEvent(latLong: string) {
+    this.form.get('endereco').setValue('Your location');
+    // console.log(latLong);
+
+    this.myLatLng = JSON.parse(latLong);
+  }
+
+  // private setCurrentPosition() {
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       this.latitude = position.coords.latitude;
+  //       this.longitude = position.coords.longitude;
+  //       this.zoom = 12;
+  //     });
+  //   }
+  // }
 
 
 }
